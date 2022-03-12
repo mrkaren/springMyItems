@@ -15,6 +15,5 @@ public class CreateItemRequest {
     private String title;
     private double price;
     private String description;
-    private int userId;
     private List<Integer> categories;
 }

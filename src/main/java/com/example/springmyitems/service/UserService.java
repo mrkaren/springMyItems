@@ -1,10 +1,12 @@
 package com.example.springmyitems.service;
 
+import com.example.springmyitems.entity.Role;
 import com.example.springmyitems.entity.User;
 import com.example.springmyitems.repository.CategoryRepository;
 import com.example.springmyitems.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +16,13 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
 
     public User save(User user) {
+        String encode = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encode);
+        user.setRole(Role.USER);
         return userRepository.save(user);
     }
 

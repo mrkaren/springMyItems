@@ -12,10 +12,6 @@ Save Item
     price:<input type="number" name="price" th:value="${item == null} ? '' : ${item.price}"/><br>
     description:<textarea name="description" th:text="${item == null} ? '' : ${item.description}"></textarea><br>
     picture:<input type="file" name="pictures" multiple /><br>
-    users:
-    <select name="userId">
-        <option th:each="user: ${users}" th:text="${user.name}" th:value="${user.id}"></option>
-    </select> <br>
     Categories:
     <select name="categories[]" multiple>
         <option th:each="cat: ${categories}" th:text="${cat.name}" th:value="${cat.id}"></option>
