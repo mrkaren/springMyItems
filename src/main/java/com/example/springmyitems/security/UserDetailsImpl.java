@@ -20,7 +20,7 @@ public class UserDetailsImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> byEmail = userRepository.findByEmail(username);
         if (!byEmail.isPresent()) {
-            throw new UsernameNotFoundException("username " + username + " not found");
+            throw new UsernameNotFoundException("username not found");
         }
 
         return new CurrentUser(byEmail.get());
