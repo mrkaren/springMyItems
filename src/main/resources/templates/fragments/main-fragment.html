@@ -8,11 +8,11 @@
 
 <div th:fragment="login">
 
-    <div th:if="${user == null}">
+    <div th:if="${currentUser == null}">
         <a href="/login">Login</a>
     </div>
-    <div th:if="${user != null}">
-        Welcome, <span th:text="${user.name}"></span> | <a href="/myItems">My Items</a>
+    <div th:if="${currentUser != null}">
+        Welcome, <span th:text="${currentUser.user.name}"></span> | <a href="/myItems">My Items</a>
         <a href="/logout">Logout</a>
     </div>
 
