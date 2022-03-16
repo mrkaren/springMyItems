@@ -33,4 +33,6 @@ public class Item {
     
     private String itemType;
 
+    private boolean isTop;
+
 }
