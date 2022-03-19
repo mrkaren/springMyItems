@@ -8,6 +8,7 @@ import com.example.springmyitems.service.CategoryService;
 import com.example.springmyitems.service.ItemService;
 import com.example.springmyitems.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -24,6 +25,9 @@ public class ItemController {
     private final ItemService itemService;
     private final UserService userService;
     private final CategoryService categoryService;
+
+    private final ModelMapper mapper;
+
 
     @GetMapping("/items")
     public String itemsPage(ModelMap map) {
@@ -64,7 +68,10 @@ public class ItemController {
                           @RequestParam("pictures") MultipartFile[] uploadedFiles,
                           @AuthenticationPrincipal CurrentUser currentUser
     ) throws IOException {
-        itemService.addItemFromItemRequest(createItemRequest, uploadedFiles, currentUser.getUser());
+
+        Item item = mapper.map(createItemRequest, Item.class);
+
+        itemService.addItem(item, uploadedFiles, currentUser.getUser(), createItemRequest.getCategories());
         return "redirect:/items";
     }
 
